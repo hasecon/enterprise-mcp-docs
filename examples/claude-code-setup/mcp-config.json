@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "enterprise-docs": {
+      "command": "python",
+      "args": ["-m", "enterprise_mcp_docs.server"],
+      "env": {
+        "REDIS_URL": "redis://localhost:6379",
+        "LOG_LEVEL": "INFO"
+      },
+      "restart": true
+    }
+  }
+}

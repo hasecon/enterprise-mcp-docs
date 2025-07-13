@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "enterprise-docs": {
+      "command": "enterprise-mcp-docs",
+      "args": ["serve"],
+      "env": {
+        "REDIS_URL": "redis://localhost:6379",
+        "CONFIG_FILE": "config/local.json"
+      }
+    }
+  }
+}
