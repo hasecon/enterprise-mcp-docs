@@ -1,0 +1,89 @@
+{
+  "tools": {
+    "elasticsearch": {
+      "provider": "Elasticsearch",
+      "base_url": "https://www.elastic.co/guide/en/elasticsearch/reference/current/",
+      "sections": ["getting-started", "search", "mapping", "query-dsl", "aggregations"],
+      "cache_ttl": 3600,
+      "enabled": true
+    },
+    "docker": {
+      "provider": "Docker",
+      "base_url": "https://docs.docker.com/",
+      "sections": ["get-started", "build", "compose", "swarm", "engine"],
+      "cache_ttl": 7200,
+      "enabled": true
+    },
+    "python": {
+      "provider": "Python",
+      "base_url": "https://docs.python.org/3/",
+      "sections": ["tutorial", "library", "reference"],
+      "cache_ttl": 7200,
+      "enabled": true
+    },
+    "n8n": {
+      "provider": "N8N",
+      "base_url": "https://docs.n8n.io/",
+      "sections": ["workflows", "nodes", "credentials", "code"],
+      "cache_ttl": 3600,
+      "enabled": true
+    },
+    "ollama": {
+      "provider": "Ollama",
+      "base_url": "https://github.com/ollama/ollama/blob/main/docs/",
+      "sections": ["api", "modelfile", "import", "tutorials"],
+      "cache_ttl": 3600,
+      "enabled": true
+    },
+    "proxmox": {
+      "provider": "Proxmox",
+      "base_url": "https://pve.proxmox.com/pve-docs/",
+      "sections": ["installation", "cluster", "storage", "backup", "firewall"],
+      "cache_ttl": 7200,
+      "enabled": false
+    },
+    "nessus": {
+      "provider": "Nessus",
+      "base_url": "https://docs.tenable.com/nessus/",
+      "sections": ["scanning", "policies", "reports", "api"],
+      "cache_ttl": 86400,
+      "enabled": false
+    },
+    "topdesk": {
+      "provider": "TopDesk",
+      "base_url": "https://developers.topdesk.com/",
+      "sections": ["api", "webhooks", "integrations"],
+      "cache_ttl": 86400,
+      "enabled": false
+    },
+    "confluence": {
+      "provider": "Confluence",
+      "base_url": "https://confluence.atlassian.com/doc/",
+      "sections": ["spaces", "pages", "templates", "api"],
+      "cache_ttl": 7200,
+      "enabled": false
+    }
+  },
+  "vector_db": {
+    "enabled": true,
+    "collection_prefix": "docs_",
+    "embedding_model": "all-MiniLM-L6-v2",
+    "persist_directory": "./chroma_db"
+  },
+  "cache": {
+    "redis_url": "redis://localhost:6379",
+    "ttl": 3600,
+    "prefix": "mcp_docs:"
+  },
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "log_level": "INFO"
+  },
+  "crawling": {
+    "max_workers": 4,
+    "request_timeout": 30,
+    "request_delay": 1,
+    "retry_attempts": 3
+  }
+}
