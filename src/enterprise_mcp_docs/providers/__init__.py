@@ -1,5 +1,12 @@
-"""Documentation providers for various enterprise tools."""
+"""Provider package for documentation sources.
 
-from .base import BaseProvider
+This package contains provider implementations for different tools.
+Currently implemented as placeholders for CI/CD compatibility.
+"""
 
-__all__ = ["BaseProvider"]
+from typing import Dict, Type
+
+# Placeholder for future provider implementations
+PROVIDER_REGISTRY: Dict[str, Type] = {}
+
+__all__ = ["PROVIDER_REGISTRY"]

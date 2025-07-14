@@ -8,6 +8,6 @@ __author__ = "Hasecon"
 __description__ = "Enterprise MCP Documentation Server"
 __url__ = "https://github.com/hasecon/enterprise-mcp-docs"
 
-from .server import MultiDocsServer
+from .server import MCPServer
 
-__all__ = ["MultiDocsServer"]
+__all__ = ["MCPServer"]
