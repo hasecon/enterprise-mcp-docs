@@ -1,7 +1,8 @@
 """
 Enterprise MCP Documentation Server
 
-A basic MCP server implementation for development and testing.
+MCP server with HTTP health endpoint for Docker deployments.
+The actual MCP protocol server is in mcp_server.py
 """
 
 import json
@@ -63,8 +64,8 @@ class MCPServer:
         """Start the MCP server"""
         logger.info("🚀 Enterprise MCP Documentation Server Starting...")
         logger.info(f"📅 Started at: {self.start_time.isoformat()}")
-        logger.info("🏗️  This is a development container")
-        logger.info("📚 Documentation server implementation coming soon!")
+        logger.info("🏗️  HTTP health server for Docker deployment")
+        logger.info("📚 MCP protocol server available via stdio interface")
 
         # Environment info
         env = os.getenv("ENVIRONMENT", "development")

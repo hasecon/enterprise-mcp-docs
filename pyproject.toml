@@ -74,7 +74,8 @@ Changelog = "https://github.com/hasecon/enterprise-mcp-docs/blob/main/CHANGELOG.
 
 [project.scripts]
 enterprise-mcp-docs = "enterprise_mcp_docs.cli:main"
-mcp-docs-server = "enterprise_mcp_docs.server:main"
+mcp-docs-server = "enterprise_mcp_docs.mcp_server:main"
+mcp-docs-http = "enterprise_mcp_docs.server:main"
 mcp-docs-crawl = "enterprise_mcp_docs.crawl:main"
 
 [tool.setuptools.packages.find]

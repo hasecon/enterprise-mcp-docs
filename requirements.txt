@@ -13,10 +13,10 @@ redis>=5.0.0
 # Optional: System monitoring
 psutil>=5.9.0
 
-# Optional: MCP and AI dependencies (commented out until available)
-# mcp>=0.1.0
-# chromadb>=0.4.0
-# sentence-transformers>=2.2.0
+# MCP and AI dependencies
+mcp>=0.1.0
+chromadb>=0.4.0
+sentence-transformers>=2.2.0
 
 # Optional: Rich output formatting
 rich>=13.0.0

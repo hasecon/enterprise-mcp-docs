@@ -8,7 +8,8 @@ from typing import Optional
 import click
 
 from . import __version__
-from .server import MCPServer
+from .server import MCPServer  # HTTP health server
+from .mcp_server import EnterpriseMCPServer  # Actual MCP server
 
 
 @click.group()
@@ -32,33 +33,55 @@ def cli(ctx, config: Optional[str], verbose: bool):
 
 
 @cli.command()
-@click.option("--host", default="0.0.0.0", help="Host to bind to")
-@click.option("--port", default=8000, type=int, help="Port to bind to")
-@click.option("--daemon", is_flag=True, help="Run in daemon mode")
+@click.option("--mode", type=click.Choice(["mcp", "http"]), default="mcp", 
+              help="Server mode: 'mcp' for MCP protocol, 'http' for health server")
+@click.option("--host", default="0.0.0.0", help="Host to bind to (HTTP mode only)")
+@click.option("--port", default=8000, type=int, help="Port to bind to (HTTP mode only)")
+@click.option("--config", type=click.Path(exists=True), help="Configuration file")
 @click.option("--test-mode", is_flag=True, help="Run in test mode")
 @click.pass_context
-def serve(ctx, host: str, port: int, daemon: bool, test_mode: bool):
-    """Start the MCP server."""
+def serve(ctx, mode: str, host: str, port: int, config: Optional[str], test_mode: bool):
+    """Start the MCP server.
+    
+    By default starts the MCP protocol server for Claude Code integration.
+    Use --mode http for Docker health server mode.
+    """
     if ctx.obj["verbose"]:
-        click.echo(f"Starting MCP server on {host}:{port}")
+        click.echo(f"Starting {mode.upper()} server...")
 
     if test_mode:
         click.echo("🧪 Running in test mode")
         click.echo("✅ Server startup test passed")
         return
 
-    # Set environment variables
-    os.environ["HOST"] = host
-    os.environ["PORT"] = str(port)
-
     try:
-        server = MCPServer()
-        if daemon:
-            click.echo("🚀 Starting MCP server in daemon mode...")
-        else:
-            click.echo("🚀 Starting MCP server...")
-
-        server.start()
+        if mode == "mcp":
+            # Start the actual MCP protocol server
+            import asyncio
+            
+            click.echo("🚀 Starting MCP protocol server...")
+            click.echo("📡 Listening for stdio connections from Claude Code")
+            
+            # TODO: Load config from file if provided
+            server_config = {
+                "tools": {
+                    "elasticsearch": {"provider": "Elasticsearch", "enabled": True},
+                    "docker": {"provider": "Docker", "enabled": True}, 
+                    "python": {"provider": "Python", "enabled": True}
+                }
+            }
+            
+            server = EnterpriseMCPServer(server_config)
+            asyncio.run(server.start())
+            
+        elif mode == "http":
+            # Start HTTP health server (for Docker)
+            os.environ["HOST"] = host
+            os.environ["PORT"] = str(port)
+            
+            click.echo(f"🚀 Starting HTTP health server on {host}:{port}")
+            server = MCPServer()
+            server.start()
 
     except KeyboardInterrupt:
         click.echo("\n🛑 Server stopped by user")
