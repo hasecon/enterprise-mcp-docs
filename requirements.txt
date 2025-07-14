@@ -1,12 +1,34 @@
-mcp>=0.1.0
+# Core dependencies for Enterprise MCP Documentation Server
 aiohttp>=3.9.0
 beautifulsoup4>=4.12.0
-chromadb>=0.4.0
-sentence-transformers>=2.2.0
-redis>=5.0.0
 pydantic>=2.5.0
 python-dotenv>=1.0.0
 click>=8.1.0
-rich>=13.0.0
 tenacity>=8.2.0
 httpx>=0.26.0
+
+# Optional: Redis for caching
+redis>=5.0.0
+
+# Optional: System monitoring
+psutil>=5.9.0
+
+# Optional: MCP and AI dependencies (commented out until available)
+# mcp>=0.1.0
+# chromadb>=0.4.0
+# sentence-transformers>=2.2.0
+
+# Optional: Rich output formatting
+rich>=13.0.0
+
+# Development dependencies (install with pip install -e ".[dev]")
+# pytest>=7.4.0
+# pytest-asyncio>=0.21.0
+# black>=23.9.0
+# isort>=5.12.0
+# flake8>=6.1.0
+# mypy>=1.6.0
+
+# Documentation dependencies
+# mkdocs>=1.5.0
+# mkdocs-material>=9.4.0
